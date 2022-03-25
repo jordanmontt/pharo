@@ -474,16 +474,18 @@ Integer >> bitInvert [
 
 { #category : #'bit manipulation' }
 Integer >> bitInvert32 [
-	"Answer the 32-bit complement of the receiver."
-
-	^ self bitXor: 16rFFFFFFFF
+	"Answer the 32-bit complement of the receiver. Cut the over part. Raise exception if receiver if negative."
+	
+	(self < 0) ifTrue: [ Error signal: 'Cannot invert negative numbers' ].
+	^ (self bitXor: 16rFFFFFFFF) bitAnd: 16rFFFFFFFF
 ]
 
 { #category : #'bit manipulation' }
 Integer >> bitInvert64 [
-	"Answer the 64-bit complement of the receiver."
+	"Answer the 64-bit complement of the receiver. Cut the over part. Raise exception if receiver if negative."
 
-	^ self bitXor: 16rFFFFFFFFFFFFFFFF
+	self < 0 ifTrue: [ Error signal: 'Cannot invert negative numbers' ].
+	^ (self bitXor: 16rFFFFFFFFFFFFFFFF) bitAnd: 16rFFFFFFFFFFFFFFFF
 ]
 
 { #category : #'bit manipulation' }

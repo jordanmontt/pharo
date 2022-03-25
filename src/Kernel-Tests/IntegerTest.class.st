@@ -120,6 +120,10 @@ IntegerTest >> testBitClear [
 IntegerTest >> testBitInverted32 [
 
 	self assert: 2r0 bitInvert32 equals: 16rFFFFFFFF.
+	self assert: (16rFFFFFFFF printStringBase:2) size equals: 32.
+	
+	self assert: (16r0FFFFFFF bitInvert32 printStringBase:2) size equals: 32.
+	self assert: (16r0FFFFFFF bitInvert32 printStringBase:2) equals: '11110000000000000000000000000000'.  
 	
 	self assert: 2r1010 bitInvert32 equals: 2r11111111111111111111111111110101.
 	
@@ -127,9 +131,19 @@ IntegerTest >> testBitInverted32 [
 ]
 
 { #category : #'tests - bitLogic' }
+IntegerTest >> testBitInverted32NegativeNumberShouldRaiseError [
+
+	 self should: [ -5 bitInvert32 ] raise: Error
+	
+]
+
+{ #category : #'tests - bitLogic' }
 IntegerTest >> testBitInverted32OnLargeNumber [
 
-	self assert: 16rFFFFFFFF bitInvert32 equals: 16r0.
+	self assert: 16rFFFFFFFFFF bitInvert32 equals: 16r0.
+	
+	self assert: (16rFFEEFFFFFF bitInvert32 printStringBase:2) size equals: 32
+	
 	
 	
 ]
@@ -141,6 +155,26 @@ IntegerTest >> testBitInverted64 [
 	
 	self assert: 2r1010 bitInvert64 equals: 2r1111111111111111111111111111111111111111111111111111111111110101.
 	
+	
+]
+
+{ #category : #'tests - bitLogic' }
+IntegerTest >> testBitInverted64NegativeNumberShouldRaiseError [
+
+	 self should: [ -5 bitInvert64 ] raise: Error
+	
+]
+
+{ #category : #'tests - bitLogic' }
+IntegerTest >> testBitInverted64OnLargeNumber [
+
+	self assert: 2r0 bitInvert64 equals: 16rFFFFFFFFFFFFFFFF.
+	
+	self assert: (16rFFFFFFFFFFFFFFFF printStringBase:2) size equals: 64.	
+	self 
+		assert:  (16r0FFFFFFFFFFFFFFF bitInvert64 printStringBase:2) equals: '1111000000000000000000000000000000000000000000000000000000000000'.
+		
+	self assert: (16rFFEEFFFFFFFFFFFFFF bitInvert64 printStringBase:2) size equals: 64
 	
 ]
 
