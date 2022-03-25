@@ -117,6 +117,34 @@ IntegerTest >> testBitClear [
 ]
 
 { #category : #'tests - bitLogic' }
+IntegerTest >> testBitInverted32 [
+
+	self assert: 2r0 bitInvert32 equals: 16rFFFFFFFF.
+	
+	self assert: 2r1010 bitInvert32 equals: 2r11111111111111111111111111110101.
+	
+	
+]
+
+{ #category : #'tests - bitLogic' }
+IntegerTest >> testBitInverted32OnLargeNumber [
+
+	self assert: 16rFFFFFFFF bitInvert32 equals: 16r0.
+	
+	
+]
+
+{ #category : #'tests - bitLogic' }
+IntegerTest >> testBitInverted64 [
+
+	self assert: 2r0 bitInvert64 equals: 16rFFFFFFFFFFFFFFFF.
+	
+	self assert: 2r1010 bitInvert64 equals: 2r1111111111111111111111111111111111111111111111111111111111110101.
+	
+	
+]
+
+{ #category : #'tests - bitLogic' }
 IntegerTest >> testBitLogic [  
 	"This little suite of tests is designed to verify correct operation of most of Pharo's bit manipulation code, including two's complement representation of negative values.  It was written in a hurry and is probably lacking several important checks."
 	

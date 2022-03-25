@@ -480,6 +480,13 @@ Integer >> bitInvert32 [
 ]
 
 { #category : #'bit manipulation' }
+Integer >> bitInvert64 [
+	"Answer the 64-bit complement of the receiver."
+
+	^ self bitXor: 16rFFFFFFFFFFFFFFFF
+]
+
+{ #category : #'bit manipulation' }
 Integer >> bitOr: n [ 
 	"Answer an Integer whose bits are the logical OR of the receiver's bits  
 	and those of the argument, n."
